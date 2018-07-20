@@ -14,7 +14,7 @@ use App\Events\QRScanned;
 */
 
 Route::get('/', function () {
-	$qr = QrCode::size(200)->generate(env('APP_ENV').Request::ip());
+	$qr = QrCode::size(200)->generate(env('APP_URL').Request::ip());
     return view('home', compact('qr'));
 });
 
