@@ -12,7 +12,9 @@ use App\Events\QRScanned;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('ip_address', function() {
+	return Request::ip();
+});
 Route::get('/', function () {
 	$qr = QrCode::size(200)->generate(env('APP_URL').'something?ip='.Request::ip());
     return view('home', compact('qr'));

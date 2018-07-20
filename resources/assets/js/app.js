@@ -19,9 +19,20 @@ window.Vue = require('vue');
 
 const app = new Vue({
     el: '#app',
+    data: {
+    	ip: '127001'
+    },
     created() {
-    	Echo.channel('channelDemoEvent')
+    	axios.get('/ip_address')
+    		 .then(function(response) {
+    		 	console.log((response.data).replace(/\./g, ''));
+    		 	this.ip = (response.data).replace(/\./g, '');
+    		 	console.log('channel' + this.ip)
+    		 	console.log((this.ip).length)
+    		 });
+    	Echo.channel('channel-' + this.ip)
     		.listen('QRScanned' , (e) => {
+    			console.log(e)
     			$('#content').html('Success!')
     		})
     }

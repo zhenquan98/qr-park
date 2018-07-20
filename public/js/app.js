@@ -13895,8 +13895,18 @@ window.Vue = __webpack_require__(36);
 
 var app = new Vue({
   el: '#app',
+  data: {
+    ip: '127001'
+  },
   created: function created() {
-    Echo.channel('channelDemoEvent').listen('QRScanned', function (e) {
+    axios.get('/ip_address').then(function (response) {
+      console.log(response.data.replace(/\./g, ''));
+      this.ip = response.data.replace(/\./g, '');
+      console.log('channel' + this.ip);
+      console.log(this.ip.length);
+    });
+    Echo.channel('channel-' + this.ip).listen('QRScanned', function (e) {
+      console.log(e);
       $('#content').html('Success!');
     });
   }
