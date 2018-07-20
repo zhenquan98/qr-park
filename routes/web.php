@@ -21,10 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/something', function (Request $request) {
-	if(Request::all()['ip'] == Request::ip())
-	{
-		event(new QRScanned());
-	}
+	event(new QRScanned());
 });
 Auth::routes();
 
